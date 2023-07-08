@@ -39,12 +39,17 @@
     }
   },
   "dependencies": {
-    "@americanexpress/one-app-router": "^1.1.0",
-    "holocron": "^1.1.2",
-    "react": "^16.14.0",
     "@americanexpress/one-app-ducks": "^4.3.1",
+    "@americanexpress/one-app-router": "^1.1.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.6",
+    "dayjs": "^1.11.9",
+    "holocron": "^1.1.2",
     "immutable": "^4.0.0-rc.12",
     "prop-types": "^15.7.2",
+    "react": "^16.14.0",
     "react-intl": "^5.10.6",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5"
@@ -52,6 +57,7 @@
   "devDependencies": {
     "@americanexpress/one-app-bundler": "^6.10.0",
     "@americanexpress/one-app-runner": "^6.10.0",
+    "@babel/polyfill": "^7.12.1",
     "amex-jest-preset-react": "^6.1.0",
     "babel-eslint": "^10.1.0",
     "babel-preset-amex": "^3.5.0",
@@ -59,12 +65,11 @@
     "enzyme-to-json": "^3.6.1",
     "eslint": "^7.15.0",
     "eslint-config-amex": "^13.1.0",
-    "jest": "^26.6.3",
-    "rimraf": "^3.0.2",
     "glob": "^7.1.6",
-    "@babel/polyfill": "^7.12.1",
+    "jest": "^26.6.3",
     "jest-json-schema": "^2.1.0",
-    "parrot-middleware": "^4.1.1"
+    "parrot-middleware": "^4.1.1",
+    "rimraf": "^3.0.2"
   },
   "jest": {
     "preset": "amex-jest-preset-react",
