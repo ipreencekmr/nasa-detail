@@ -98,8 +98,8 @@ export const Asteroids = () => {
             justifyContent="space-between"
             alignItems="center"
             flexWrap="wrap"
-            columnGap="20px"
-            rowGap="20px"
+            columnGap="1rem"
+            rowGap="1rem"
             sx={{
                 my:2, 
                 border: '1px dashed gray',

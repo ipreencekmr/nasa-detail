@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { fromJS } from 'immutable';
 import { MarsRover } from './MarsRover';
 import { Asteroids } from './Asteroids';
+import { DonkiNotif } from './DonkiNotif';
 
 export const NasaDetail = ({ languageData, localeName, params }) => {
   const { id } = params || {};
@@ -13,7 +14,7 @@ export const NasaDetail = ({ languageData, localeName, params }) => {
   if (languageData.greeting) {
     return (
       <IntlProvider locale={localeName} messages={languageData}>
-        {id==='mro'?<MarsRover></MarsRover>:<Asteroids></Asteroids>}
+        {id==='mro'?<MarsRover />:(id==='neo'?<Asteroids />:<DonkiNotif />)}
       </IntlProvider>
     );
   }
