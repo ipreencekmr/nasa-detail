@@ -2,7 +2,7 @@ require('amex-jest-preset-react/jest-setup');
 require('@babel/polyfill');
 const { matchersWithOptions } = require('jest-json-schema');
 
-// eslint-disable-next-line no-undef
+// eslint-disable-next-line no-undef -- desc
 expect.extend(matchersWithOptions({
   extendRefs: true,
   formats: {

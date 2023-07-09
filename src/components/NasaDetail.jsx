@@ -14,7 +14,7 @@ export const NasaDetail = ({ languageData, localeName, params }) => {
   if (languageData.greeting) {
     return (
       <IntlProvider locale={localeName} messages={languageData}>
-        {id==='mro'?<MarsRover />:(id==='neo'?<Asteroids />:<DonkiNotif />)}
+        {id === 'mro' ? <MarsRover /> : id === 'neo' ? <Asteroids /> : <DonkiNotif />}
       </IntlProvider>
     );
   }
@@ -22,7 +22,9 @@ export const NasaDetail = ({ languageData, localeName, params }) => {
 };
 
 NasaDetail.propTypes = {
-  params: PropTypes.string,
+  params: PropTypes.shape({
+    id:PropTypes.string
+  }),
   router: PropTypes.shape({
     push: PropTypes.func,
   }),
