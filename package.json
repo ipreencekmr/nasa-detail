@@ -12,7 +12,10 @@
     "prepare": "npm run build",
     "test:lint": "eslint --ignore-path .gitignore --ext js,jsx,snap .",
     "test:unit": "jest",
-    "test": "npm run test:lint && npm run test:unit"
+    "test": "npm run test:lint && npm run test:unit",
+    "deploy:module": "vercel --cwd build --prod --yes --name nasa-detail",
+    "generate:map": "node ./scripts/updateModuleMap",
+    "deploy": "npm run deploy:module && npm run generate:map && vercel statics --prod --yes --name module-map"
   },
   "one-amex": {
     "app": {
@@ -34,7 +37,10 @@
     },
     "bundler": {
       "requiredExternals": [
-        "react-intl"
+        "react-intl",
+        "@emotion/react",
+        "@emotion/styled",
+        "dayjs"
       ]
     }
   },
