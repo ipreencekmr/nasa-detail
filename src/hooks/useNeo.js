@@ -1,10 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useNasaDomain } from '../selectors/useNASADomainSelector';
+import { useNeoUri } from '../selectors/useNeoURISelector';
+import { useApiKey } from '../selectors/useAPIKeySelector';
 
 export const useNeo = (startDate, endDate) => {
-  const nasaDomain = useSelector((state) => state.getIn(['config', 'nasaDomain']));
-  const neoUri = useSelector((state) => state.getIn(['config', 'neoUri']));
-  const apiKey = useSelector((state) => state.getIn(['config', 'apiKey']));
+  const nasaDomain = useNasaDomain();
+  const neoUri = useNeoUri();
+  const apiKey = useApiKey();
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [neoResponse, setNeoResponse] = React.useState([]);
@@ -25,21 +27,20 @@ export const useNeo = (startDate, endDate) => {
       const API_URL = `${BASE_URL}?${paramStr}`;
 
       const response = await fetch(API_URL);
-      const responseList = [];
+      let responseList = [];
 
       if (response.ok) {
         const responseJson = await response.json();
 
-        for (const [key, value] of Object.entries(responseJson?.near_earth_objects)) {
-          console.log(`${key}: ${value}`);
-
+        const neoEntries = Object.entries(responseJson?.near_earth_objects);
+        responseList = neoEntries.reduce((accumulator, [key, value]) => {
           const asteroidObjects = value.map((item) => {
             const newItem = { ...item };
             newItem.date = key;
             return newItem;
           });
-          responseList.push(...asteroidObjects);
-        }
+          return [...accumulator, ...asteroidObjects];
+        }, []);
       }
 
       setNeoResponse(responseList);

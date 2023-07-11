@@ -1,10 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useNasaDomain } from '../selectors/useNASADomainSelector';
+import { useMroUri } from '../selectors/useMroURISelector';
+import { useApiKey } from '../selectors/useAPIKeySelector';
 
 export const useMarsRover = (page, camera) => {
-  const nasaDomain = useSelector((state) => state.getIn(['config', 'nasaDomain']));
-  const mroUri = useSelector((state) => state.getIn(['config', 'mroUri']));
-  const apiKey = useSelector((state) => state.getIn(['config', 'apiKey']));
+  const nasaDomain = useNasaDomain();
+  const mroUri = useMroUri();
+  const apiKey = useApiKey();
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [mroResponse, setMroResponse] = React.useState([]);
@@ -41,7 +43,7 @@ export const useMarsRover = (page, camera) => {
     }
 
     setIsLoading(false);
-  }, [nasaDomain, mroUri, apiKey]);
+  }, [nasaDomain, mroUri, apiKey, camera, page]);
 
   React.useEffect(() => {
     fetchAPI();

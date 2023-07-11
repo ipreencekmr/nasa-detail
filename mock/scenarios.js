@@ -1,20 +1,40 @@
-// Read the following to find out more:
-// Configuring scenarios: https://github.com/americanexpress/parrot/blob/master/SCENARIOS.md
+const apodResponse = require('./apod.json');
+const neoResponse = require('./neo.json');
+const mroResponse = require('./mro.json');
+const donkiResponse = require('./donki.json');
 
 module.exports = {
-  'hello world': [
+  success: [
     {
-      request: '/hello',
+      request: '/proxy_api/planetary/apod',
       response: {
-        data: 'hello world',
+        contentType: 'application/json',
+        status: 200,
+        body: apodResponse,
       },
     },
-  ],
-  'hello universe': [
     {
-      request: '/hello',
+      request: '/proxy_api/neo/rest/v1/feed',
       response: {
-        data: 'hello universe',
+        contentType: 'application/json',
+        status: 200,
+        body: neoResponse,
+      },
+    },
+    {
+      request: '/proxy_api/mars-photos/api/v1/rovers/curiosity/photos',
+      response: {
+        contentType: 'application/json',
+        status: 200,
+        body: mroResponse,
+      },
+    },
+    {
+      request: '/proxy_api/DONKI/notifications',
+      response: {
+        contentType: 'application/json',
+        status: 200,
+        body: donkiResponse,
       },
     },
   ],

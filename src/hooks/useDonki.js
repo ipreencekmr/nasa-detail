@@ -1,10 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useNasaDomain } from '../selectors/useNASADomainSelector';
+import { useApiKey } from '../selectors/useAPIKeySelector';
+import { useDonkiUri } from '../selectors/useDonkiURISelector';
 
 export const useDonki = (startDate, endDate, type) => {
-  const nasaDomain = useSelector((state) => state.getIn(['config', 'nasaDomain']));
-  const donkiUri = useSelector((state) => state.getIn(['config', 'donkiUri']));
-  const apiKey = useSelector((state) => state.getIn(['config', 'apiKey']));
+  const nasaDomain = useNasaDomain();
+  const donkiUri = useDonkiUri();
+  const apiKey = useApiKey();
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [donkiResponse, setDonkiResponse] = React.useState([]);

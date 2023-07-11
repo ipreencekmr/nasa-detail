@@ -29,6 +29,7 @@
       ],
       "rootModuleName": "nasa-root",
       "parrotMiddleware": "./dev.middleware.js",
+      "devEndpoints":"./dev.endpoint.js",
       "envVars": {
         "ONE_CONFIG_ENV": "development",
         "NODE_ENV": "development",
@@ -58,7 +59,8 @@
     "react": "^16.14.0",
     "react-intl": "^5.10.6",
     "react-redux": "^7.2.2",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "reselect": "^4.1.8"
   },
   "devDependencies": {
     "@americanexpress/one-app-bundler": "^6.10.0",
