@@ -8,8 +8,11 @@ import { Asteroids } from './Asteroids';
 import { DonkiNotif } from './DonkiNotif';
 import { getLanguageDataSelector, getLocaleSelector } from '../selectors/marketSelector';
 import { MODULE_NAME } from '../constants/module';
+import { ProgressLoader } from './ProgressLoader';
 
-export const NasaDetail = ({ languageData, localeName, params }) => {
+export const NasaDetail = ({
+  languageData, localeName, params, moduleLoadStatus,
+}) => {
   const { id } = params || {};
 
   const renderComponent = (detailId) => {
@@ -24,6 +27,10 @@ export const NasaDetail = ({ languageData, localeName, params }) => {
         return <DonkiNotif />;
     }
   };
+
+  if (moduleLoadStatus === 'loading') {
+    <ProgressLoader />;
+  }
 
   if (languageData.greeting) {
     return (
@@ -46,6 +53,7 @@ NasaDetail.propTypes = {
     greeting: PropTypes.string.isRequired,
   }).isRequired,
   localeName: PropTypes.string.isRequired,
+  moduleLoadStatus: PropTypes.oneOf(['loading', 'loaded', 'error']),
 };
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -56,8 +64,8 @@ export const mapDispatchToProps = (dispatch) => ({
 });
 
 export const mapStateToProps = (state, ownProps) => ({
-  languageData: getLanguageDataSelector(state, ownProps.locale, MODULE_NAME),
   localeName: getLocaleSelector(state),
+  languageData: getLanguageDataSelector(state, ownProps.params.locale, MODULE_NAME),
 });
 
 export const loadModuleData = ({ store: { dispatch } }) => dispatch(loadLanguagePack(MODULE_NAME, { fallbackLocale: 'en-US' }));

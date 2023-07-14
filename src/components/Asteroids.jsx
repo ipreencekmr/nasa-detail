@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import dayjs from 'dayjs';
 import { AsterCard } from './AsterCard';
 import { useNeo } from '../hooks/useNeo';
+import { NoResults } from './NoResults';
+import { ProgressLoader } from './ProgressLoader';
 
 export const Asteroids = () => {
   const [startDate, setStartDate] = React.useState(dayjs(new Date()).format('YYYY-MM-DD'));
@@ -20,7 +22,9 @@ export const Asteroids = () => {
     fetchAPI,
   } = useNeo(startDate, endDate);
 
-  if (isLoading || error || !neoResponse) return null;
+  if (isLoading) return <ProgressLoader />;
+
+  if (error) return null;
 
   return (
     <Container>
@@ -79,12 +83,13 @@ export const Asteroids = () => {
         }}
       >
         {
-                neoResponse?.map((item) => (
-                  <Grid item={true} key={item.name}>
-                    <AsterCard item={item} />
-                  </Grid>
-                ))
-            }
+          neoResponse?.length === 0 ? <NoResults />
+            : neoResponse?.map((item) => (
+              <Grid item={true} key={item.name}>
+                <AsterCard item={item} />
+              </Grid>
+            ))
+        }
       </Grid>
     </Container>
   );

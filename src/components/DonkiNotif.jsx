@@ -12,6 +12,8 @@ import Typography from '@mui/material/Typography';
 import { notifTypes } from '../constants/constants';
 import { DonkiCard } from './DonkiCard';
 import { useDonki } from '../hooks/useDonki';
+import { NoResults } from './NoResults';
+import { ProgressLoader } from './ProgressLoader';
 
 export const DonkiNotif = () => {
   const [startDate, setStartDate] = React.useState(dayjs(new Date()).format('YYYY-MM-DD'));
@@ -25,12 +27,14 @@ export const DonkiNotif = () => {
     fetchAPI,
   } = useDonki(startDate, endDate, type);
 
-  if (isLoading || error) return null;
+  if (isLoading) return <ProgressLoader />;
+
+  if (error) return null;
 
   return (
     <Container>
       <Typography gutterBottom={true} variant="h5" component="div">
-        Donki Notifications (max feed limit is 7 Days)
+        Donki Notifications
       </Typography>
       <Grid
         container={true}
@@ -96,10 +100,11 @@ export const DonkiNotif = () => {
         }}
       >
         {
-                    donkiResponse?.map((item) => (
-                      <DonkiCard key={item.messageID} item={item} />
-                    ))
-                }
+          donkiResponse?.length === 0 ? <NoResults />
+            : donkiResponse?.map((item) => (
+              <DonkiCard key={item.messageID} item={item} />
+            ))
+        }
       </Grid>
     </Container>
   );

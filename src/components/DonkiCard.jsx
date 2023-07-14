@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -69,4 +70,14 @@ export const DonkiCard = ({ item }) => {
       </CardActions>
     </Card>
   );
+};
+
+DonkiCard.propTypes = {
+  item: PropTypes.shape({
+    messageID: PropTypes.string,
+    messageType: PropTypes.string,
+    messageURL: PropTypes.string,
+    messageIssueTime: PropTypes.string,
+    messageBody: PropTypes.string,
+  }),
 };
