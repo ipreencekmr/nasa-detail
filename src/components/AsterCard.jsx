@@ -14,22 +14,22 @@ export const AsterCard = ({ item }) => {
     name,
     estimated_diameter: {
       kilometers: {
-        estimated_diameter_min,
-        estimated_diameter_max,
+        estimated_diameter_min: estimatedMinDiameter,
+        estimated_diameter_max: estimatedMaxDiameter,
       },
     },
-    absolute_magnitude_h,
-    is_potentially_hazardous_asteroid,
+    absolute_magnitude_h: absoluteMagnitude,
+    is_potentially_hazardous_asteroid: isHazardous,
   } = { ...item } || {};
 
-  const diameterRange = `${Number(estimated_diameter_min).toFixed(2)} - ${Number(estimated_diameter_max).toFixed(2)}`;
+  const diameterRange = `${Number(estimatedMinDiameter).toFixed(2)} - ${Number(estimatedMaxDiameter).toFixed(2)}`;
 
   return (
     <Card>
       <CardHeader
         title={name}
         avatar={
-                is_potentially_hazardous_asteroid ? <ReportGmailerrorredIcon /> : <BookmarkAddedIcon />
+                isHazardous ? <ReportGmailerrorredIcon /> : <BookmarkAddedIcon />
             }
       />
       <CardContent>
@@ -37,7 +37,7 @@ export const AsterCard = ({ item }) => {
           Diameter: {diameterRange} kms
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          <strong>Magnitude</strong>: { absolute_magnitude_h }
+          <strong>Magnitude</strong>: { absoluteMagnitude }
         </Typography>
       </CardContent>
     </Card>

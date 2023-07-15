@@ -65,7 +65,7 @@ export const mapDispatchToProps = (dispatch) => ({
 
 export const mapStateToProps = (state, ownProps) => ({
   localeName: getLocaleSelector(state),
-  languageData: getLanguageDataSelector(state, ownProps.params.locale, MODULE_NAME),
+  languageData: getLanguageDataSelector(state, ownProps?.params?.locale, MODULE_NAME),
 });
 
 export const loadModuleData = ({ store: { dispatch } }) => dispatch(loadLanguagePack(MODULE_NAME, { fallbackLocale: 'en-US' }));
